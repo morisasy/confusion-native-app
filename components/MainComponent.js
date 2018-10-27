@@ -55,7 +55,8 @@ const MainNavigator = createDrawerNavigator({
           drawerLabel: 'Menu'
         }, 
       }
-}, {
+},
+ {
   drawerBackgroundColor: '#D1C4E9'
 });
 
@@ -78,7 +79,6 @@ class Main extends Component {
  
     return (
       <View style={{flex:1, paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight }}>
-             <MenuNavigator />
             <MainNavigator />
       </View>
     );
