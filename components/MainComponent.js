@@ -3,11 +3,28 @@ import Menu from './MenuComponent';
 
 import Dishdetail from './DishDetailComponent';
 import { DISHES } from '../shared/dishes';
-import { View, Platform } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { View, Platform } from 'react-native'
 import Home from './HomeComponent';
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
+
+const MenuNavigator = createStackNavigator({
+    Menu: { screen: Menu },
+    Dishdetail: { screen: Dishdetail }
+},
+{
+    initialRouteName: 'Menu',
+    navigationOptions: {
+        headerStyle: {
+            backgroundColor: "#512DA8"
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            color: "#fff"            
+        }
+    }
+}
+);
 
 const HomeNavigator = createStackNavigator({
     Home: { screen: Home }
@@ -61,8 +78,9 @@ class Main extends Component {
  
     return (
       <View style={{flex:1, paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight }}>
+             <MenuNavigator />
             <MainNavigator />
-        </View>
+      </View>
     );
   }
 }
