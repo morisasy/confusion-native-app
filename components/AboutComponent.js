@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, View } from 'react-native';
+import { FlatList, Text, ScrollView, View } from 'react-native';
 import { Card } from 'react-native-elements';
-
-import {FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
 
 import { LEADERS } from '../shared/leaders';
@@ -43,8 +41,9 @@ class AboutUS extends Component {
                                 key={index}
                                 title={item.name}
                                 subtitle={item.description}
-                                hideChevron={false}
+                                hideChevron={true}
                                 leftAvatar={{ source: require('./images/vadonut.png')}}
+                                containerStyle={{ borderBottomWidth: 0 }}
                             />
 
                
@@ -54,20 +53,20 @@ class AboutUS extends Component {
        
 
         return (
-            <View>
+            <ScrollView>
                 <View>
                     <History />
                 </View>
                 <View>
-                <Card title="Cooperate Leadership">
-                        <FlatList 
-                                data={this.state.leaders}
-                                renderItem={renderLeaderItem}
-                                keyExtractor={item => item.id.toString()}
-                                />
-                </Card>
+                    <Card title="Cooperate Leadership">
+                            <FlatList 
+                                    data={this.state.leaders}
+                                    renderItem={renderLeaderItem}
+                                    keyExtractor={item => item.id.toString()}
+                                    />
+                    </Card>
                 </View>
-            </View>
+            </ScrollView>
                 
         );
     }
