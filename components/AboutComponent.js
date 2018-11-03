@@ -15,7 +15,7 @@ function History() {
     
     return(
         <Card title="Our Histroy">
-            <Text>{descriptions}</Text>
+            <Text style={{paddingBottom:10}}>{descriptions}</Text>
             <Text>{descriptions2}</Text>
         </Card>
     );
@@ -40,26 +40,34 @@ class AboutUS extends Component {
 
             return (
                 <ListItem
-                    key={index}
-                    title={item.name}
-                    subtitle={item.description}
-                    hideChevron={true}
-                    leftAvatar={{ source: require('./images/vadonut.png')}}
-                />
+                                key={index}
+                                title={item.name}
+                                subtitle={item.description}
+                                hideChevron={false}
+                                leftAvatar={{ source: require('./images/vadonut.png')}}
+                            />
+
+               
             );
         };
 
        
 
         return (
-            <ScrollView>
-                <History />
-                <FlatList 
-                    data={this.state.leaders}
-                    renderItem={renderLeaderItem}
-                    keyExtractor={item => item.id.toString()}
-                    />
-            </ScrollView>
+            <View>
+                <View>
+                    <History />
+                </View>
+                <View>
+                <Card title="Cooperate Leadership">
+                        <FlatList 
+                                data={this.state.leaders}
+                                renderItem={renderLeaderItem}
+                                keyExtractor={item => item.id.toString()}
+                                />
+                </Card>
+                </View>
+            </View>
                 
         );
     }

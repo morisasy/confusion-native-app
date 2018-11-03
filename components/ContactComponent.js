@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, View } from 'react-native';
 import { Card } from 'react-native-elements';
-import { DISHES } from '../shared/dishes';
-import { PROMOTIONS } from '../shared/promotions';
-import { LEADERS } from '../shared/leaders';
 
 function ContactCard() {
     
     return(
-        <Card title="Contact Information"
-        style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start' }}
-        >
+        <Card title="Contact Information">
             <Text>121, Clear Water Bay Road</Text>
             <Text>Clear Water Bay, Kowloon</Text>
             <Text>HONG KONG</Text>
@@ -27,9 +22,8 @@ class ContactUs extends Component {
     render() {
         
         return(
-           <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start' }}>
-                    <ContactCard />
-           </View>
+            <ContactCard />
+          
         );
     }
 }
