@@ -18,6 +18,7 @@ function History() {
         </Card>
     );
 }
+
 class AboutUS extends Component {
 
     constructor(props) {
@@ -62,6 +63,7 @@ class AboutUS extends Component {
                             <FlatList 
                                     data={this.state.leaders}
                                     renderItem={renderLeaderItem}
+                                    
                                     keyExtractor={item => item.id.toString()}
                                     />
                     </Card>
