@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Menu from './MenuComponent';
-import Dishdetail from './DishDetailComponent';
+import DishDetail from './DishDetailComponent';
 import Home from './HomeComponent';
 import ContactUs from './ContactComponent';
-import AboutUs from './AboutComponent';
+import About from './AboutComponent';
 import { View,
          Platform, 
          Text, 
@@ -49,7 +49,7 @@ const MenuNavigator = createStackNavigator({
               onPress={ () => navigation.toggleDrawer() } />          
             })  
         },
-    Dishdetail: { screen: Dishdetail }
+    Dishdetail: { screen: DishDetail }
 },
 {
     initialRouteName: 'Menu',
@@ -84,7 +84,7 @@ const HomeNavigator = createStackNavigator({
 });
 
 const AboutNavigator = createStackNavigator({
-  Home: { screen: AboutUs }
+  Home: { screen: About }
 }, 
 {
   navigationOptions: ({ navigation }) => ({

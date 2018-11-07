@@ -26,7 +26,8 @@ function History() {
     );
 }
 
-class AboutUS extends Component {
+class About extends Component {
+
     static navigationOptions = {
         title: 'About Us'
     };
@@ -59,7 +60,7 @@ class AboutUS extends Component {
                     <Card title="Cooperate Leadership">
                         <FlatList 
                                 data={this.props.leaders.leaders}
-                                renderItem={renderLeader}
+                                renderItem={renderLeaderItem}
                                 keyExtractor={item => item.id.toString()}
                                 />
                     </Card>
