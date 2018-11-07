@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { FlatList, Text, ScrollView, View } from 'react-native';
 import { Card } from 'react-native-elements';
 import { ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
 
-import { LEADERS } from '../shared/leaders';
+const mapStateToProps = state => {
+    return {
+      leaders: state.leaders
+    }
+  }
+
 
 const descriptions = `Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong. Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.`;
 
@@ -20,14 +27,6 @@ function History() {
 }
 
 class AboutUS extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            leaders: LEADERS
-        };
-    }
-
     static navigationOptions = {
         title: 'About Us'
     };
@@ -38,16 +37,14 @@ class AboutUS extends Component {
         const renderLeaderItem = ({item, index}) => {
 
             return (
-                <ListItem
-                                key={index}
-                                title={item.name}
-                                subtitle={item.description}
-                                hideChevron={true}
-                                leftAvatar={{ source: require('./images/vadonut.png')}}
-                                containerStyle={{ borderBottomWidth: 0 }}
-                            />
-
-               
+                 <ListItem
+                            key={index}
+                            title={item.name}
+                            subtitle={item.description}
+                            hideChevron={true}
+                            leftAvatar={{source: {uri: baseUrl + item.image}}}
+                            containerStyle={{ borderBottomWidth: 0 }}
+                        />             
             );
         };
 
@@ -60,12 +57,11 @@ class AboutUS extends Component {
                 </View>
                 <View>
                     <Card title="Cooperate Leadership">
-                            <FlatList 
-                                    data={this.state.leaders}
-                                    renderItem={renderLeaderItem}
-                                    
-                                    keyExtractor={item => item.id.toString()}
-                                    />
+                        <FlatList 
+                                data={this.props.leaders.leaders}
+                                renderItem={renderLeader}
+                                keyExtractor={item => item.id.toString()}
+                                />
                     </Card>
                 </View>
             </ScrollView>
@@ -75,4 +71,4 @@ class AboutUS extends Component {
 }
 
 
-export default AboutUS;
+export default connect(mapStateToProps)(About);
