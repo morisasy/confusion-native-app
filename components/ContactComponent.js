@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
 
 function ContactCard() {

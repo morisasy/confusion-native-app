@@ -4,11 +4,17 @@ import Dishdetail from './DishDetailComponent';
 import Home from './HomeComponent';
 import ContactUs from './ContactComponent';
 import AboutUs from './AboutComponent';
-import { View, Platform, Text, ScrollView, Image, StyleSheet } from 'react-native';
+import { View,
+         Platform, 
+         Text, 
+         ScrollView, 
+         Image,
+          StyleSheet } from 'react-native';
+          
 import { createStackNavigator,
-   createDrawerNavigator,
-    DrawerItems,
-     SafeAreaView } from 'react-navigation';
+         createDrawerNavigator,
+         DrawerItems,
+         SafeAreaView } from 'react-navigation';
 
 import { Icon } from 'react-native-elements';
 
