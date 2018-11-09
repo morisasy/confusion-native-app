@@ -20,8 +20,8 @@ function History() {
     
     return(
         <Card title="Our Histroy">
-            <Text style={{paddingBottom:10}}>{descriptions}</Text>
-            <Text>{descriptions2}</Text>
+            <Text style={{margin: 10}}>{descriptions}</Text>
+            <Text style={{margin: 10}}>{descriptions2}</Text>
         </Card>
     );
 }

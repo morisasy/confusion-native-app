@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Menu from './MenuComponent';
-import DishDetail from './DishDetailComponent';
 import Home from './HomeComponent';
 import ContactUs from './ContactComponent';
 import About from './AboutComponent';
+import DishDetail from './DishDetailComponent';
 import { View,
          Platform, 
          Text, 
@@ -24,12 +24,12 @@ import { fetchDishes,
          fetchLeaders } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
-  return {
-    dishes: state.dishes,
-    comments: state.comments,
-    promotions: state.promotions,
-    leaders: state.leaders
-  }
+      return {
+        dishes: state.dishes,
+        comments: state.comments,
+        promotions: state.promotions,
+        leaders: state.leaders
+      }
 }
 
 const mapDispatchToProps = dispatch => ({
