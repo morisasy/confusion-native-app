@@ -23,6 +23,27 @@ import { fetchDishes,
         fetchPromos,
          fetchLeaders } from '../redux/ActionCreators';
 
+import Reservation from './ReservationComponent';
+
+
+const ReservationNavigator = createStackNavigator({
+  Reservation: { screen: Reservation }
+}, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name="menu" size={24}
+      iconStyle={{ color: 'white' }} 
+      onPress={ () => navigation.navigate('DrawerToggle') } />    
+  })
+})
+
+
 const mapStateToProps = state => {
       return {
         dishes: state.dishes,
@@ -196,8 +217,25 @@ const MainNavigator = createDrawerNavigator({
               />
             ),
           }, 
+        },
+        
+        Reservation:
+        { screen: ReservationNavigator,
+          navigationOptions: {
+            title: 'Reserve Table',
+            drawerLabel: 'Reserve Table',
+            drawerIcon: ({ tintColor, focused }) => (
+              <Icon
+                name='cutlery'
+                type='font-awesome'            
+                size={24}
+                iconStyle={{ color: tintColor }}
+              />
+            ),
+          }
         }
 },
+     
 
  {
   drawerBackgroundColor: '#D1C4E9',
