@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 
 
 function RenderItem(props) {
-    
+    const item = props.item;
     if (props.isLoading) {
         return(
                 <Loading />

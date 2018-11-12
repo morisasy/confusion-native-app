@@ -22,4 +22,4 @@ Email:confusion@food.net
 // json-server --watch db.json -p 3001 -H 172.20.10.6:3001
 // json-server --watch db.json --host 172.20.10.6 -p 3001 -d 2000
  127.0.0.1 
- json-server --watch db.json --host 127.0.0.1 -p 3001 -d 2000
+ json-server --watch db.json --host 172.20.10.6 -p 3001 -d 2000
