@@ -9,7 +9,7 @@ import { View,
          Text, 
          ScrollView, 
          Image,
-          StyleSheet } from 'react-native';
+         StyleSheet } from 'react-native';
           
 import { createStackNavigator,
          createDrawerNavigator,
