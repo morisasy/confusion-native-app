@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList, Modal, StyleSheet } from 'react-native';
-import { Card, Icon, Rating } from 'react-native-elements';
+import { Text, View, ScrollView, FlatList, Modal, StyleSheet, TextInput } from 'react-native';
+import { Card, Icon, Rating, Input, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { postFavorite } from '../redux/ActionCreators';
@@ -76,8 +76,8 @@ function RenderDish(props) {
                                 name='pencil'
                                 type='font-awesome'
                                 color='#3b119e'
-                                onPress={() => console.log('hello')} 
-                           />
+                                onPress={props.handlePress}                            
+                                />
                         </View>
                         
                 </Card>
@@ -97,7 +97,7 @@ class DishDetail extends Component {
             showModal: false,
             rating: 1,
             author: "",
-            comment: '',
+            comment: "",
         };
         
     }
@@ -123,8 +123,8 @@ class DishDetail extends Component {
     resetForm() {
         this.setState({
             rating: 1,
-            author: "",
-            comment: '',
+            author: "Author",
+            comment: "Comment",
             showModal: false
         });
     }
@@ -135,10 +135,46 @@ class DishDetail extends Component {
                 <RenderDish dish={this.props.dishes.dishes[+dishId]}
                      favorite={this.props.favorites.some(el => el === dishId)}
                     onPress={() => this.markFavorite(dishId)} 
+                    handlePress = {() => this.toggleModal()}
                     />
                 <RenderComments 
                     comments={this.props.comments.comments.filter((comment) => comment.dishId === dishId)} 
                     />
+                <Modal
+                    visible = {this.state.showModal}
+                    onDismiss = {() => this.toggleModal()} 
+                    onRequestClose = {() => this.toggleModal() }>
+               
+                    <View style = {styles.modal}>
+
+                       
+                        <Text style = {styles.modalTitle}>author</Text>
+                        <Input
+                            placeholder='Author'
+                            leftIcon={{ type: 'font-awesome', name: 'author' }}
+                            onChangeText={(author) => this.setState({author})}
+                            value={this.state.author}
+                            />
+                        <Input
+                            placeholder='Comment'
+                            leftIcon={{ type: 'font-awesome', name: 'comment' }}
+                            onChangeText={(comment) => this.setState({comment})}
+                            value={this.state.comment}
+                            />
+
+                        <Button 
+                            onPress = {() =>{() => this.handleReservation(); this.resetForm();}}
+                            color="#512DA8"
+                            title="Submit" 
+                            />
+                        <Button 
+                            onPress = {() =>{this.toggleModal(); this.resetForm();}}
+                            color="#512DA8"
+                            title="Cancel" 
+                            />
+                    </View>
+            
+                </Modal>
                 
                 
             </ScrollView>
