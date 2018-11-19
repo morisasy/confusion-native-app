@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList, Modal, StyleSheet, TextInput } from 'react-native';
-import { Card, Icon, Rating, Input, Button } from 'react-native-elements';
+import { Text, View, ScrollView, FlatList, Modal, StyleSheet, Button, TextInput} from 'react-native';
+import { Card, Icon, Rating, Input} from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
-import { postFavorite } from '../redux/ActionCreators';
+import { postFavorite, postComment } from '../redux/ActionCreators';
 
 
 const mapStateToProps = state => {
@@ -15,7 +15,8 @@ const mapStateToProps = state => {
   }
 
 const mapDispatchToProps = dispatch => ({
-    postFavorite: (dishId) => dispatch(postFavorite(dishId))
+    postFavorite: (dishId) => dispatch(postFavorite(dishId)),
+    postComment: (comment) => dispatch(postComment(comment))
 })
 
 
@@ -33,7 +34,7 @@ function RenderComments(props) {
                     readonly
                     startingValue={item.rating}
                  />
-                <Text style={{fontSize: 12}}>{'-- ' + item.author + ', ' + item.date} </Text>
+                <Text style={{fontSize: 12}}>{'-- ' + item.author + ', ' + item.date.substring(0, 10)} </Text>
             </View>
         );
     };
@@ -76,7 +77,7 @@ function RenderDish(props) {
                                 name='pencil'
                                 type='font-awesome'
                                 color='#3b119e'
-                                onPress={props.handlePress}                            
+                                onPress={props.toggleModal}                            
                                 />
                         </View>
                         
@@ -95,7 +96,7 @@ class DishDetail extends Component {
         this.state = {
             favorites: [],
             showModal: false,
-            rating: 1,
+            userRating: 3,
             author: "",
             comment: "",
         };
@@ -114,18 +115,21 @@ class DishDetail extends Component {
     toggleModal() {
         this.setState({showModal: !this.state.showModal});
     }
-
+    ratingComplete() {
+        //console.log("Rating is: " + this.state.userRating)
+        this.setState({userRating: rating}) 
+    }
     handleReservation() {
         console.log(JSON.stringify(this.state));
         this.toggleModal();
     }
-
+    
     resetForm() {
         this.setState({
-            rating: 1,
-            author: "Author",
-            comment: "Comment",
-            showModal: false
+            showModal: false,
+            userRating: 3,
+            author: "",
+            comment: "",
         });
     }
     render() {
@@ -135,7 +139,7 @@ class DishDetail extends Component {
                 <RenderDish dish={this.props.dishes.dishes[+dishId]}
                      favorite={this.props.favorites.some(el => el === dishId)}
                     onPress={() => this.markFavorite(dishId)} 
-                    handlePress = {() => this.toggleModal()}
+                    toggleModal={ () => this.toggleModal()}
                     />
                 <RenderComments 
                     comments={this.props.comments.comments.filter((comment) => comment.dishId === dishId)} 
@@ -146,18 +150,26 @@ class DishDetail extends Component {
                     onRequestClose = {() => this.toggleModal() }>
                
                     <View style = {styles.modal}>
-
                        
-                        <Text style = {styles.modalTitle}>author</Text>
+                        <Text style = {styles.modalTitle}>Your Comment</Text>
+                        <Rating
+                            showRating
+                            type="star"
+                            fractions={1}
+                            startingValue={3}
+                            imageSize={40}
+                            style={{ paddingVertical: 10 }}
+                            onFinishRating={(rating)=> this.ratingComplete({rating}) }
+                             />
                         <Input
-                            placeholder='Author'
-                            leftIcon={{ type: 'font-awesome', name: 'author' }}
+                        
+                            leftIcon={{ type: 'font-awesome', name: 'user-o' }}
                             onChangeText={(author) => this.setState({author})}
                             value={this.state.author}
                             />
                         <Input
-                            placeholder='Comment'
-                            leftIcon={{ type: 'font-awesome', name: 'comment' }}
+            
+                            leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
                             onChangeText={(comment) => this.setState({comment})}
                             value={this.state.comment}
                             />
@@ -203,7 +215,6 @@ const styles = StyleSheet.create({
     formItem: {
         flex: 1
     },
-
     modal: {
         justifyContent: 'center',
         margin: 20

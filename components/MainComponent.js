@@ -4,6 +4,7 @@ import Home from './HomeComponent';
 import ContactUs from './ContactComponent';
 import About from './AboutComponent';
 import DishDetail from './DishDetailComponent';
+import { Loading } from './LoadingComponent';
 import { View,
          Platform, 
          Text, 
