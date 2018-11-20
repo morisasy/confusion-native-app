@@ -14,7 +14,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "react-native-date-picker": "^2.2.0",
     "react-native-datepicker": "^1.7.2",
-    "react-native-elements": "^0.19.1",
+    "react-native-elements": "^1.0.0-beta7",
     "react-native-ratings": "^6.0.0",
     "react-navigation": "^2.18.1",
     "react-redux": "^5.1.0",

@@ -119,8 +119,10 @@ class DishDetail extends Component {
         //console.log("Rating is: " + this.state.userRating)
         this.setState({userRating: rating}) 
     }
-    handleReservation() {
+    handleReservation(dishId, rating, author, comment) {
         console.log(JSON.stringify(this.state));
+       
+        this.props.postComment(dishId, rating, author, comment);
         this.toggleModal();
     }
     
@@ -175,14 +177,18 @@ class DishDetail extends Component {
                             />
 
                         <Button 
-                            onPress = {() =>{() => this.handleReservation(); this.resetForm();}}
+                            onPress = {() =>{() => this.handleReservation(dishId, this.state.userRating, this.state.author, this.state.comment); this.resetForm();}}
                             color="#512DA8"
                             title="Submit" 
+                            buttonStyle={{width: '100%'}}
+                            accessibilityLabel="Submit"
                             />
                         <Button 
                             onPress = {() =>{this.toggleModal(); this.resetForm();}}
                             color="#512DA8"
-                            title="Cancel" 
+                            title="Cancel"
+                            buttonStyle={{width: '100%'}} 
+                            accessibilityLabel="Quit Modal"
                             />
                     </View>
             
