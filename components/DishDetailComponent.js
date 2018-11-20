@@ -148,7 +148,6 @@ class DishDetail extends Component {
                     />
                 <Modal
                     visible = {this.state.showModal}
-                    onDismiss = {() => this.toggleModal()} 
                     onRequestClose = {() => this.toggleModal() }>
                
                     <View style = {styles.modal}>
