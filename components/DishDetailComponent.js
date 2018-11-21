@@ -115,17 +115,17 @@ class DishDetail extends Component {
     toggleModal() {
         this.setState({showModal: !this.state.showModal});
     }
-    ratingComplete() {
+    ratingComplete= (rating) =>{
         //console.log("Rating is: " + this.state.userRating)
         this.setState({userRating: rating}) 
     }
-    handleReservation(dishId, rating, author, comment) {
+    handleSubmit(dishId, rating, author, comment) {
         console.log(JSON.stringify(this.state));
-       
+        console.log(dishId, rating, author, comment);
         this.props.postComment(dishId, rating, author, comment);
         this.toggleModal();
     }
-    
+        
     resetForm() {
         this.setState({
             showModal: false,
@@ -160,7 +160,7 @@ class DishDetail extends Component {
                             startingValue={3}
                             imageSize={40}
                             style={{ paddingVertical: 10 }}
-                            onFinishRating={(rating)=> this.ratingComplete({rating}) }
+                            onFinishRating={this.ratingComplete}
                              />
                         <Input
                         
@@ -176,7 +176,7 @@ class DishDetail extends Component {
                             />
 
                         <Button 
-                            onPress = {() =>{() => this.handleReservation(dishId, this.state.userRating, this.state.author, this.state.comment); this.resetForm();}}
+                            onPress = {() =>{() => this.handleSubmit(dishId, this.state.userRating, this.state.author, this.state.comment); this.resetForm();}}
                             color="#512DA8"
                             title="Submit" 
                             buttonStyle={{width: '100%'}}
@@ -221,6 +221,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     modal: {
+        flex: 1,
         justifyContent: 'center',
         margin: 20
      },
