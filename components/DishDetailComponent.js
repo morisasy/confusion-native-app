@@ -119,7 +119,7 @@ class DishDetail extends Component {
         //console.log("Rating is: " + this.state.userRating)
         this.setState({userRating: rating}) 
     }
-    handleSubmit(dishId, rating, author, comment) {
+    handleComment(dishId, rating, author, comment) {
         console.log(JSON.stringify(this.state));
         console.log(dishId, rating, author, comment);
         this.props.postComment(dishId, rating, author, comment);
@@ -176,7 +176,7 @@ class DishDetail extends Component {
                             />
 
                         <Button 
-                            onPress = {() =>{() => this.handleSubmit(dishId, this.state.userRating, this.state.author, this.state.comment); this.resetForm();}}
+                            onPress = {() =>{this.handleComment(dishId, this.state.userRating, this.state.author, this.state.comment); this.resetForm();}}
                             color="#512DA8"
                             title="Submit" 
                             buttonStyle={{width: '100%'}}
