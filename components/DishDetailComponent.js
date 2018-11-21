@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList, Modal, StyleSheet, Button, TextInput} from 'react-native';
+import { Text, View, ScrollView, FlatList, Modal, StyleSheet, Button} from 'react-native';
 import { Card, Icon, Rating, Input} from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
@@ -152,7 +152,6 @@ class DishDetail extends Component {
                
                     <View style = {styles.modal}>
                        
-                        <Text style = {styles.modalTitle}>Your Comment</Text>
                         <Rating
                             showRating
                             type="star"
@@ -179,15 +178,16 @@ class DishDetail extends Component {
                             onPress = {() =>{this.handleComment(dishId, this.state.userRating, this.state.author, this.state.comment); this.resetForm();}}
                             color="#512DA8"
                             title="Submit" 
-                            buttonStyle={{width: '100%'}}
+                            buttonStyle={styles.btnSubmit}
                             accessibilityLabel="Submit"
                             />
                         <Button 
                             onPress = {() =>{this.toggleModal(); this.resetForm();}}
-                            color="#512DA8"
+                            color="#888"
                             title="Cancel"
-                            buttonStyle={{width: '100%'}} 
+                            buttonStyle={styles.btnCancel} 
                             accessibilityLabel="Quit Modal"
+                           
                             />
                     </View>
             
@@ -222,6 +222,7 @@ const styles = StyleSheet.create({
     },
     modal: {
         flex: 1,
+        alignItems: 'center',
         justifyContent: 'center',
         margin: 20
      },
@@ -236,6 +237,16 @@ const styles = StyleSheet.create({
      modalText: {
          fontSize: 18,
          margin: 10
-     }
+     },
+     btnSubmit: {
+        width: '100%',
+        paddingTop: 10,
+        backgroundColor: "#2c15a7"
+    },
+    btnCancel: {
+        width: '100%',
+        paddingTop: 10,
+        backgroundColor: "#b8b9b1"
+    }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(DishDetail);
