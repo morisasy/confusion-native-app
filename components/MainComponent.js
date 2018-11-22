@@ -4,7 +4,8 @@ import Home from './HomeComponent';
 import ContactUs from './ContactComponent';
 import About from './AboutComponent';
 import DishDetail from './DishDetailComponent';
-import { Loading } from './LoadingComponent';
+import Reservation from './ReservationComponent';
+import Favorites from './FavoriteComponent';
 import { View,
          Platform, 
          Text, 
@@ -22,10 +23,24 @@ import { connect } from 'react-redux';
 import { fetchDishes, 
         fetchComments, 
         fetchPromos,
-         fetchLeaders } from '../redux/ActionCreators';
+        fetchLeaders } from '../redux/ActionCreators';
 
-import Reservation from './ReservationComponent';
 
+const mapStateToProps = state => {
+          return {
+            dishes: state.dishes,
+            comments: state.comments,
+            promotions: state.promotions,
+            leaders: state.leaders
+          }
+    }
+    
+const mapDispatchToProps = dispatch => ({
+      fetchDishes: () => dispatch(fetchDishes()),
+      fetchComments: () => dispatch(fetchComments()),
+      fetchPromos: () => dispatch(fetchPromos()),
+      fetchLeaders: () => dispatch(fetchLeaders()),
+    })
 
 const ReservationNavigator = createStackNavigator({
   Reservation: { screen: Reservation }
@@ -45,21 +60,6 @@ const ReservationNavigator = createStackNavigator({
 })
 
 
-const mapStateToProps = state => {
-      return {
-        dishes: state.dishes,
-        comments: state.comments,
-        promotions: state.promotions,
-        leaders: state.leaders
-      }
-}
-
-const mapDispatchToProps = dispatch => ({
-  fetchDishes: () => dispatch(fetchDishes()),
-  fetchComments: () => dispatch(fetchComments()),
-  fetchPromos: () => dispatch(fetchPromos()),
-  fetchLeaders: () => dispatch(fetchLeaders()),
-})
 
 
 const MenuNavigator = createStackNavigator({
@@ -140,6 +140,24 @@ const ContactNavigator = createStackNavigator({
               onPress={ () => navigation.toggleDrawer() } />   
   })
 });
+
+const FavoritesNavigator = createStackNavigator({
+  Favorites: { screen: Favorites }
+}, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name="menu" size={24}
+      iconStyle={{ color: 'white' }} 
+      onPress={ () => navigation.navigate('DrawerToggle') } />    
+  })
+});
+
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
     <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
@@ -236,7 +254,22 @@ const MainNavigator = createDrawerNavigator({
           }
         }
 },
-     
+          
+        Favorites:
+        { screen: FavoritesNavigator,
+          navigationOptions: {
+            title: 'My Favorites',
+            drawerLabel: 'My Favorites',
+            drawerIcon: ({ tintColor, focused }) => (
+              <Icon
+                name='heart'
+                type='font-awesome'            
+                size={24}
+                iconStyle={{ color: tintColor }}
+              />
+            ),
+          }
+},  
 
  {
   drawerBackgroundColor: '#D1C4E9',
