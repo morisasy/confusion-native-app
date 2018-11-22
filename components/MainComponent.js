@@ -23,24 +23,25 @@ import { connect } from 'react-redux';
 import { fetchDishes, 
         fetchComments, 
         fetchPromos,
-        fetchLeaders } from '../redux/ActionCreators';
+         fetchLeaders } from '../redux/ActionCreators';
+
 
 
 const mapStateToProps = state => {
-          return {
-            dishes: state.dishes,
-            comments: state.comments,
-            promotions: state.promotions,
-            leaders: state.leaders
-          }
-    }
-    
+      return {
+        dishes: state.dishes,
+        comments: state.comments,
+        promotions: state.promotions,
+        leaders: state.leaders
+      }
+}
+
 const mapDispatchToProps = dispatch => ({
-      fetchDishes: () => dispatch(fetchDishes()),
-      fetchComments: () => dispatch(fetchComments()),
-      fetchPromos: () => dispatch(fetchPromos()),
-      fetchLeaders: () => dispatch(fetchLeaders()),
-    })
+  fetchDishes: () => dispatch(fetchDishes()),
+  fetchComments: () => dispatch(fetchComments()),
+  fetchPromos: () => dispatch(fetchPromos()),
+  fetchLeaders: () => dispatch(fetchLeaders()),
+})
 
 const ReservationNavigator = createStackNavigator({
   Reservation: { screen: Reservation }
@@ -252,24 +253,24 @@ const MainNavigator = createDrawerNavigator({
               />
             ),
           }
+        },
+
+      Favorites:
+      { screen: FavoritesNavigator,
+        navigationOptions: {
+          title: 'My Favorites',
+          drawerLabel: 'My Favorites',
+          drawerIcon: ({ tintColor, focused }) => (
+            <Icon
+              name='heart'
+              type='font-awesome'            
+              size={24}
+              iconStyle={{ color: tintColor }}
+            />
+          ),
         }
-},
-          
-        Favorites:
-        { screen: FavoritesNavigator,
-          navigationOptions: {
-            title: 'My Favorites',
-            drawerLabel: 'My Favorites',
-            drawerIcon: ({ tintColor, focused }) => (
-              <Icon
-                name='heart'
-                type='font-awesome'            
-                size={24}
-                iconStyle={{ color: tintColor }}
-              />
-            ),
-          }
-},  
+      }
+},   
 
  {
   drawerBackgroundColor: '#D1C4E9',
