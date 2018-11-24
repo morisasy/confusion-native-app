@@ -152,7 +152,7 @@ class DishDetail extends Component {
         this.state = {
             favorites: [],
             showModal: false,
-            userRating: 3,
+            userRating: 1,
             author: "",
             comment: "",
         };
@@ -187,7 +187,7 @@ class DishDetail extends Component {
     resetForm() {
         this.setState({
             showModal: false,
-            userRating: 3,
+            userRating: 1,
             author: "",
             comment: "",
         });
