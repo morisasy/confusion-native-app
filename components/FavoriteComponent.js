@@ -20,7 +20,7 @@ const mapStateToProps = state => {
   }
 
 class Favorites extends Component {
-
+    
     static navigationOptions = {
         title: 'My Favorites'
     };

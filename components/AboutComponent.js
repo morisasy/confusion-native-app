@@ -77,15 +77,15 @@ class About extends Component {
             return(
                 <ScrollView>
                     <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
-                    <History />
-                    <Card
-                        title='Corporate Leadership'>
-                    <FlatList 
-                        data={this.props.leaders.leaders}
-                        renderItem={renderLeader}
-                        keyExtractor={item => item.id.toString()}
-                        />
-                    </Card>
+                        <History />
+                        <Card
+                            title='Corporate Leadership'>
+                        <FlatList 
+                            data={this.props.leaders.leaders}
+                            renderItem={renderLeader}
+                            keyExtractor={item => item.id.toString()}
+                            />
+                        </Card>
                     </Animatable.View>
                 </ScrollView>
             );
