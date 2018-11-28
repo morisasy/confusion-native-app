@@ -46,36 +46,37 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const LoginNavigator = createStackNavigator({
-  Login: { screen: Login }
-}, {
-navigationOptions: ({ navigation }) => ({
-  headerStyle: {
-      backgroundColor: "#512DA8"
-  },
-  headerTitleStyle: {
-      color: "#fff"            
-  },
-  headerTintColor: "#fff",
-  headerLeft: <Icon name="menu" size={24}
-    iconStyle={{ color: 'white' }} 
-    onPress={ () => navigation.toggleDrawer() } />    
-})
+        Login: Login
+      }, {
+         navigationOptions: ({ navigation }) => ({
+              headerStyle: {
+                  backgroundColor: "#512DA8"
+              },
+              headerTitleStyle: {
+                  color: "#fff"            
+              },
+              title: 'Login',
+              headerTintColor: "#fff",
+              headerLeft: <Icon name="menu" size={24}
+                iconStyle={{ color: 'white' }} 
+                onPress={ () => navigation.toggleDrawer() } />    
+      })
 });
 const ReservationNavigator = createStackNavigator({
-  Reservation: { screen: Reservation }
-}, {
-  navigationOptions: ({ navigation }) => ({
-    headerStyle: {
-        backgroundColor: "#512DA8"
-    },
-    headerTitleStyle: {
-        color: "#fff"            
-    },
-    headerTintColor: "#fff",
-    headerLeft: <Icon name="menu" size={24}
-      iconStyle={{ color: 'white' }} 
-      onPress={ () => navigation.navigate('DrawerToggle') } />    
-  })
+            Reservation: { screen: Reservation }
+             }, {
+            navigationOptions: ({ navigation }) => ({
+                headerStyle: {
+                    backgroundColor: "#512DA8"
+                },
+                headerTitleStyle: {
+                    color: "#fff"            
+                },
+                headerTintColor: "#fff",
+                headerLeft: <Icon name="menu" size={24}
+                  iconStyle={{ color: 'white' }} 
+                  onPress={ () => navigation.navigate('DrawerToggle') } />    
+            })
 });
 
 
