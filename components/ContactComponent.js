@@ -4,11 +4,22 @@ import * as Animatable from 'react-native-animatable';
 import { Card, Button, Icon } from 'react-native-elements';
 import { MailComposer } from 'expo';
 
-function ContactCard() {
-    
-    return(
+class ContactUs extends Component {
+
+
+    sendMail() {
+        MailComposer.composeAsync({
+            recipients: ['confusion@food.net'],
+            subject: 'Enquiry',
+            body: 'To whom it may concern:'
+        })
+    }
+
+   
+    render() {
         
-        <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>                
+        return(
+            <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>                
              <Card  title='Contact Information'>
                 <View>
                         <Text style={{ margin: 6 }}>
@@ -39,25 +50,6 @@ function ContactCard() {
                 </View>
             </Card>
         </Animatable.View>
-    );
-}
-
-class ContactUs extends Component {
-
-
-    sendMail() {
-        MailComposer.composeAsync({
-            recipients: ['confusion@food.net'],
-            subject: 'Enquiry',
-            body: 'To whom it may concern:'
-        })
-    }
-
-   
-    render() {
-        
-        return(
-            <ContactCard />
           
         );
     }
