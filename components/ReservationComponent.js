@@ -11,7 +11,10 @@ import { Text,
 
 import DatePicker from 'react-native-datepicker';
 import * as Animatable from 'react-native-animatable';
-import { Permissions, Notifications } from 'expo';
+import {
+    Notifications ,
+     Permissions,
+      Calendar } from 'expo';
 
 
 
@@ -24,6 +27,7 @@ class Reservation extends Component {
             smoking: false,
             date: '',
             showModal: false
+            
         }
     }
 
@@ -97,13 +101,38 @@ class Reservation extends Component {
             }
         });
     }
+    obtainCalendarPermission = async () => {
 
+       let  calendarPermission = await Permissions.askAsync(Permissions.CALENDAR);
+        
+        if (calendarPermission.status.status !== 'granted') {
+            calendarPermission.status = await Permissions.askAsync(Permissions.CALENDAR);
+            if (calendarPermission.status.status !== 'granted') {
+                Alert.alert('Permission not granted to access calendar');
+            }
+        }
+        return calendarPermission;
+
+    }
+
+    addReservationToCalendar= (date) => {
+        await this.obtainCalendarPermission();
+        let details = {
+            title: "Con Fusion Table Reservation",
+            startDate: daea,
+            endDatate: new Date(Date.parse(date)+ (2*60*60*1000)),
+            location:'121, Clear Water Bay Road, Clear Water Bay, Kowloon, Hong Kong',
+            timeZone: 'Asia/Hong_Kong'
+        }
+        Calendar.createCalendarAsync(details)
+
+    }
 
     handleReservation(){
         console.log(JSON.stringify(this.state));
         this.reservationInfo();
+        this.addReservationToCalendar(his.state.date);
       
-
     }
 
 
@@ -168,12 +197,14 @@ class Reservation extends Component {
                         />
                     </View>
                     <View style={styles.formRow}>
-                    <Button
-                        onPress={() => this.handleReservation()}
-                        title="Reserve"
-                        color="#512DA8"
-                        accessibilityLabel="Learn more about this purple button"
-                        />
+                    <View style={styles.formRow}>
+                        <Button
+                            onPress={() => this.handleReservation()}
+                            title="Reserve"
+                            color="#512DA8"
+                            accessibilityLabel="Learn more about this purple button"
+                            />
+                    </View>
                     </View>  
                 </Animatable.View> 
                 <Modal animationType = {"slide"} transparent = {false}
@@ -185,12 +216,14 @@ class Reservation extends Component {
                         <Text style = {styles.modalText}>Number of Guests: {this.state.guests}</Text>
                         <Text style = {styles.modalText}>Smoking?: {this.state.smoking ? 'Yes' : 'No'}</Text>
                         <Text style = {styles.modalText}>Date and Time: {this.state.date.substring(0, 10)}</Text>
-                       
-                        <Button 
-                           onPress = {() =>{this.toggleModal(); this.resetForm();}}
-                            color="#512DA8"
-                            title="Close" 
-                            />
+                        <View style={styles.formRow}>
+                            <Button 
+                            onPress = {() =>{this.toggleModal(); this.resetForm();}}
+                                color = "#512DA8"
+                                title="Close" 
+                                
+                                />
+                        </View>
                     </View>
                 </Modal>       
             </ScrollView>

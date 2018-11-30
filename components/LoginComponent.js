@@ -154,8 +154,8 @@ class RegisterTab extends Component {
 
     }
 
-    getImageFromGallery = async() =>{
-        
+    getImageFromGallery = async () => {
+
         const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
         if (cameraRollPermission.status === 'granted') {
             let imageSource = await ImagePicker.launchImageLibraryAsync({
@@ -167,7 +167,7 @@ class RegisterTab extends Component {
                 this.processImage(imageSource.uri);
             }
         }
-        
+
     }
 
     processImage = async (imageUri) => {
@@ -221,7 +221,7 @@ class RegisterTab extends Component {
                         title="Gallery"
                         onPress={this.getImageFromGallery}
                         buttonStyle={{
-                            marginLeft: 10
+                            marginLeft: 15
                         }}
                         />
                 </View>
